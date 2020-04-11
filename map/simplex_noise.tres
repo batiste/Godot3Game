@@ -1,8 +1,9 @@
 [gd_resource type="OpenSimplexNoise" format=2]
 
 [resource]
+seed = 4
 octaves = 1
-period = 1.0
+period = 0.1
 persistence = 0.0
 lacunarity = 0.1
 

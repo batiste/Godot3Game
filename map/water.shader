@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform float limit = 0.16;
-uniform float multColor = 1.3;
+uniform float multColor = 1.1;
 uniform sampler2D waveTexture: hint_black;
 
 void fragment() {
@@ -18,12 +18,16 @@ void fragment() {
 	}
 	
 	if (isWater) {
-		vec2 translate = vec2(1.0, 1.0) * TIME / 4.0;
+		vec2 translate = vec2(1.0, 1.0) * TIME / 10.0;
 		vec4 sample = texture(waveTexture, UV * 10.0 + translate);
+		
+		float limitM = cos(TIME) / 25.0;
 
-		float mask = step(sample.y, limit);
-		if(mask > 0.9) {
+		if(sample.y - limitM > 1.0 - limit - 0.1) {
 			COLOR = colorUp;
+		}
+		if(sample.y - limitM > 1.0 - limit) {
+			COLOR = colorUp * multColor;
 		}
 	}
 }
