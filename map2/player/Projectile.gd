@@ -19,9 +19,19 @@ func enable():
 
 func _on_enemy_body_enter(body):
 	print('collision with', body)
-	var parent: Node = self.get_parent()
 	if(body.has_method('take_damage')):
-		body.take_damage(10)
+		body.take_damage(2, speed * direction)
+	$Sound.play()
+#	self.hide()
+	self.set_physics_process(false)
+	var timer = Timer.new()
+	timer.connect("timeout", self,"_destroy")
+	add_child(timer) #to process
+	timer.start(2.0) #to start
+	$CPUParticles2D.gravity = Vector2(0.0, 0.0)
+	
+func _destroy():
+	var parent: Node = self.get_parent()
 	parent.remove_child(self)
 
 func _physics_process(delta):

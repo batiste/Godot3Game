@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/idle.png-48e1ee069c0979897fd3585edb2dab26.stex"
+path="res://.import/idleLeft.png-868d77d9f7c741a6e4694840568235cf.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://map2/enemy1/idle.png"
-dest_files=[ "res://.import/idle.png-48e1ee069c0979897fd3585edb2dab26.stex" ]
+source_file="res://map2/player/animation/idleLeft.png"
+dest_files=[ "res://.import/idleLeft.png-868d77d9f7c741a6e4694840568235cf.stex" ]
 
 [params]
 
