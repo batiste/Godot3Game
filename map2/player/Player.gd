@@ -1,8 +1,10 @@
 extends KinematicBody2D
 
 # Player movement speed
-export var speed = 5000.0
+export var speed = 6000.0
 export var orientation = Vector2(1.0, 0.0)
+
+var isPlayer = true
 
 func _ready():
 	$Projectile.hide()

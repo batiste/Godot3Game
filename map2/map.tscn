@@ -1,14 +1,14 @@
-[gd_scene load_steps=68 format=2]
+[gd_scene load_steps=71 format=2]
 
 [ext_resource path="res://map2/map.gd" type="Script" id=1]
 [ext_resource path="res://map2/player/Player.gd" type="Script" id=2]
 [ext_resource path="res://map2/player/idle.png" type="Texture" id=3]
-[ext_resource path="res://map2/player/walk.png" type="Texture" id=4]
-[ext_resource path="res://map2/player/animation/idleLeft.png" type="Texture" id=5]
-[ext_resource path="res://map2/player/animation/walkLeft.png" type="Texture" id=6]
+[ext_resource path="res://map2/player/animation/idleLeft.png" type="Texture" id=4]
+[ext_resource path="res://map2/player/animation/walkLeft.png" type="Texture" id=5]
+[ext_resource path="res://map2/player/walk.png" type="Texture" id=6]
 [ext_resource path="res://map2/player/Projectile.gd" type="Script" id=7]
 [ext_resource path="res://map2/player/impact.wav" type="AudioStream" id=8]
-[ext_resource path="res://map2/player/Screenshot 2020-04-13 at 13.42.35.png" type="Texture" id=9]
+[ext_resource path="res://map2/player/light.png" type="Texture" id=9]
 [ext_resource path="res://map2/player/blaster.wav" type="AudioStream" id=10]
 [ext_resource path="res://map2/itch.png" type="Texture" id=11]
 [ext_resource path="res://map2/bat/Bat.gd" type="Script" id=12]
@@ -27,19 +27,19 @@ animations = [ {
 "name": "idle",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 4 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 5 ) ],
 "loop": true,
-"name": "walk",
+"name": "walkLeft",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ) ],
+"frames": [ ExtResource( 4 ) ],
 "loop": true,
 "name": "idleLeft",
 "speed": 5.0
 }, {
-"frames": [ ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 6 ), ExtResource( 3 ) ],
 "loop": true,
-"name": "walkLeft",
+"name": "walk",
 "speed": 5.0
 } ]
 
@@ -65,7 +65,13 @@ polygon = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 [sub_resource type="OccluderPolygon2D" id=9]
 polygon = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 
+[sub_resource type="OccluderPolygon2D" id=53]
+polygon = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
+
 [sub_resource type="OccluderPolygon2D" id=10]
+polygon = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
+
+[sub_resource type="OccluderPolygon2D" id=54]
 polygon = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 
 [sub_resource type="OccluderPolygon2D" id=11]
@@ -189,7 +195,7 @@ points = PoolVector2Array( 0, 0, 8, 0, 8, 8, 0, 8 )
 0/autotile/icon_coordinate = Vector2( 1, 0 )
 0/autotile/tile_size = Vector2( 8, 8 )
 0/autotile/spacing = 0
-0/autotile/occluder_map = [ Vector2( 6, 0 ), SubResource( 5 ), Vector2( 6, 1 ), SubResource( 6 ), Vector2( 6, 2 ), SubResource( 7 ), Vector2( 7, 0 ), SubResource( 8 ), Vector2( 7, 1 ), SubResource( 9 ), Vector2( 14, 3 ), SubResource( 10 ), Vector2( 15, 2 ), SubResource( 11 ), Vector2( 15, 3 ), SubResource( 12 ) ]
+0/autotile/occluder_map = [ Vector2( 6, 0 ), SubResource( 5 ), Vector2( 6, 1 ), SubResource( 6 ), Vector2( 6, 2 ), SubResource( 7 ), Vector2( 7, 0 ), SubResource( 8 ), Vector2( 7, 1 ), SubResource( 9 ), Vector2( 14, 2 ), SubResource( 53 ), Vector2( 14, 3 ), SubResource( 10 ), Vector2( 15, 1 ), SubResource( 54 ), Vector2( 15, 2 ), SubResource( 11 ), Vector2( 15, 3 ), SubResource( 12 ) ]
 0/autotile/navpoly_map = [  ]
 0/autotile/z_index_map = [  ]
 0/occluder_offset = Vector2( 0, 0 )
@@ -422,6 +428,9 @@ animations = [ {
 
 [sub_resource type="RectangleShape2D" id=51]
 
+[sub_resource type="CircleShape2D" id=52]
+radius = 250.0
+
 [node name="Node2D" type="Node2D"]
 script = ExtResource( 1 )
 
@@ -454,8 +463,7 @@ __meta__ = {
 
 [node name="Projectile" type="Area2D" parent="Player"]
 pause_mode = 1
-editor/display_folded = true
-position = Vector2( 109.838, -10.2383 )
+position = Vector2( 113.235, -11.585 )
 script = ExtResource( 7 )
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="Player/Projectile"]
@@ -486,9 +494,10 @@ __meta__ = {
 
 [node name="Light2D" type="Light2D" parent="Player/Projectile"]
 texture = ExtResource( 9 )
-texture_scale = 0.1
-color = Color( 0.709804, 0.184314, 0.184314, 0.643137 )
-energy = 1.5
+texture_scale = 0.5
+color = Color( 1, 0.67451, 0.67451, 1 )
+energy = 0.5
+shadow_enabled = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -502,16 +511,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Light2D" type="Light2D" parent="Player"]
-position = Vector2( 6.05904, -14.7923 )
-scale = Vector2( 1.09257, 669.192 )
+[node name="Light" type="Light2D" parent="Player"]
+scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 9 )
-texture_scale = 3.0
-mode = 2
-shadow_color = Color( 0, 0, 0, 0.509804 )
-shadow_buffer_size = 256
-shadow_filter = 2
-shadow_filter_smooth = 2.9
+texture_scale = 2.0
+energy = 0.9
+shadow_enabled = true
 __meta__ = {
 "_edit_lock_": true
 }
@@ -546,6 +551,19 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Vision" type="Area2D" parent="Bat"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Bat/Vision"]
+shape = SubResource( 52 )
+
 [node name="Music" type="AudioStreamPlayer2D" parent="."]
+visible = false
+position = Vector2( -130.617, 28.3002 )
 stream = ExtResource( 16 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.560784, 0.560784, 0.560784, 1 )
 

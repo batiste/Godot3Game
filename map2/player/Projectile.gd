@@ -5,7 +5,6 @@ export var speed = 150.0
 export var direction = Vector2(1.0, 0.0)
 
 func _ready():
-	print('ready')
 	self.set_process(false)
 	self.set_process_internal(false)
 	self.set_physics_process(false)
